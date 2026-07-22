@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UChat Chat</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#f2f2f2;
+}
+
+.header{
+background:#1877F2;
+color:white;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.chatbox{
+padding:15px;
+min-height:300px;
+}
+
+.message{
+background:white;
+padding:10px;
+margin:10px;
+border-radius:10px;
+}
+
+.bottom{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:white;
+padding:10px;
+display:flex;
+box-sizing:border-box;
+}
+
+input{
+flex:1;
+padding:10px;
+font-size:16px;
+}
+
+button{
+padding:10px 20px;
+margin-left:5px;
+background:#1877F2;
+color:white;
+border:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">💬 UChat Chat</div>
+
+<div class="chatbox" id="chatbox">
+
+</div>
+
+<div class="bottom">
+<input type="text" id="msg" placeholder="Type a message...">
+<button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+function sendMessage(){
+
+let msg=document.getElementById("msg").value;
+
+if(msg==""){
+alert("Write a message first!");
+return;
+}
+
+let chat=document.getElementById("chatbox");
+
+chat.innerHTML += "<div class='message'><b>You:</b> "+msg+"</div>";
+
+document.getElementById("msg").value="";
+
+}
+</script>
+
+</body>
+</html>
