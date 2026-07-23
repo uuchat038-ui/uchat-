@@ -46,17 +46,15 @@ window.signUp = function(){
 let email = document.getElementById("email").value;
 let password = document.getElementById("password").value;
 
-alert("Button is working!");
-
 createUserWithEmailAndPassword(auth, email, password)
 .then(() => {
     alert("Account Created Successfully!");
 })
 .catch((error) => {
-    alert("Firebase Error: " + error.code + "\n" + error.message);
+    alert(error.code + "\n" + error.message);
 });
 
-}
+  }
 
 </script>
 
