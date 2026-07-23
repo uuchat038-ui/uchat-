@@ -58,7 +58,7 @@ UChat
 </div>
 
 <div class="post">
-<h3>Welcome Umar 👋</h3>
+<h3 id="welcome">Welcome 👋</h3>
 <p>This is your first UChat post.</p>
 <button>❤️ Like</button>
 </div>
@@ -128,9 +128,36 @@ if(comment == null || comment == "") return;
 let comments = button.parentElement.querySelector(".comments");
 
 comments.innerHTML += "<p>💬 " + comment + "</p>";
+<script type="module">
 
-}
 </script>
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAgOUpPcqczVQdj4cqgosVwTVIK44QGCD0",
+  authDomain: "uchat-c441e.firebaseapp.com",
+  projectId: "uchat-c441e",
+  storageBucket: "uchat-c441e.firebasestorage.app",
+  messagingSenderId: "180429049903",
+  appId: "1:180429049903:web:114d461e2a788f6363f6da"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    document.getElementById("welcome").innerHTML =
+      "Welcome " + (user.displayName || user.email) + " 👋";
+  } else {
+    window.location.href = "login.html";
+  }
+});
+</script>
+
 </body>
 </html>
-
