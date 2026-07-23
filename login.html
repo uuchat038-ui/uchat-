@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login - UChat</title>
+</head>
+
+<body style="font-family:Arial;text-align:center;background:#1877F2;color:white;">
+
+<h1>Login</h1>
+
+<input type="email" id="email" placeholder="Email"><br><br>
+
+<input type="password" id="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAgOUpPcqczVQdj4cqgosVwTVIK44QGCD0",
+  authDomain: "uchat-c441e.firebaseapp.com",
+  databaseURL: "https://uchat-c441e-default-rtdb.firebaseio.com",
+  projectId: "uchat-c441e",
+  storageBucket: "uchat-c441e.firebasestorage.app",
+  messagingSenderId: "180429049903",
+  appId: "1:180429049903:web:114d461e2a788f6363f6da",
+  measurementId: "G-58Z8ER3085"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.login = function () {
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      alert("Login Successful!");
+      window.location.href = "home.html";
+    })
+    .catch((error) => {
+      alert(error.code);
+    });
+}
+</script>
+
+</body>
+</html>
