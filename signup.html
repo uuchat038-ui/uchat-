@@ -25,7 +25,12 @@
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import { getAuth, createUserWithEmailAndPassword, updateProfile } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import { getFirestore, doc, setDoc } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAgOUpPcqczVQdj4cqgosVwTVIK44QGCD0",
@@ -40,7 +45,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
+const db = getFirestore(app);
 window.signUp = function(){
 
 let email = document.getElementById("email").value;
@@ -54,9 +59,10 @@ createUserWithEmailAndPassword(auth, email, password)
     alert(error.code + "\n" + error.message);
 });
 
-  }
+}
 
 </script>
 
 </body>
-</html>
+  </html>
+
