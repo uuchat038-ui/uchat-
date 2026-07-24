@@ -77,38 +77,30 @@ Edit Profile
 <script>
 function saveProfile(){
 
-let name = document.getElementById("name").value;
-let bio = document.getElementById("bio").value;
-let country = document.getElementById("country").value;
+let name = document.querySelectorAll("input")[1].value;
+let country = document.querySelectorAll("input")[2].value;
+let bio = document.querySelector("textarea").value;
 
 localStorage.setItem("name", name);
-localStorage.setItem("bio", bio);
 localStorage.setItem("country", country);
+localStorage.setItem("bio", bio);
 
 let photo = document.getElementById("photo").files[0];
 
 if(photo){
+    let reader = new FileReader();
 
-let reader = new FileReader();
+    reader.onload = function(e){
+        localStorage.setItem("photo", e.target.result);
+        alert("Profile Saved!");
+        window.location.href = "profile.html";
+    };
 
-reader.onload = function(e){
+    reader.readAsDataURL(photo);
 
-localStorage.setItem("photo", e.target.result);
-
-alert("Profile Saved!");
-
-window.location.href = "profile.html";
-
-};
-
-reader.readAsDataURL(photo);
-
-}else{
-
-alert("Profile Saved!");
-
-window.location.href = "profile.html";
-
+} else {
+    alert("Profile Saved!");
+    window.location.href = "profile.html";
 }
 
 }
