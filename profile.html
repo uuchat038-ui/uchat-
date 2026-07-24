@@ -81,7 +81,11 @@ const auth = getAuth(app);
 onAuthStateChanged(auth, (user) => {
   if (user) {
     let savedName = localStorage.getItem("name");
+let savedPhoto = localStorage.getItem("photo");
 
+if(savedPhoto){
+    document.getElementById("photo").src = savedPhoto;
+  }
     document.getElementById("username").innerHTML =
       savedName || user.displayName || "UChat User";
 
