@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>Edit Profile - UChat</title>
 
 <style>
@@ -41,14 +42,12 @@ button{
 background:#1877F2;
 color:white;
 border:none;
-padding:12px 25px;
+padding:12px;
 border-radius:25px;
 font-size:18px;
 width:100%;
 }
-
 </style>
-
 </head>
 
 <body>
@@ -63,48 +62,57 @@ Edit Profile
 <input type="file" id="photo" accept="image/*">
 
 <label>Name</label>
-<input type="text" placeholder="Enter your name">
+<input type="text" id="name" placeholder="Enter your name">
 
 <label>Bio</label>
-<textarea placeholder="Tell people about yourself"></textarea>
+<textarea id="bio" placeholder="Tell people about yourself"></textarea>
 
 <label>Country</label>
-<input type="text" placeholder="Nigeria">
+<input type="text" id="country" placeholder="Nigeria">
 
-<button onclick="saveProfile()">
-Save Profile
-</button>
+<button onclick="saveProfile()">Save Profile</button>
 
 </div>
+
 <script>
 function saveProfile(){
 
-let name = document.querySelectorAll("input")[1].value;
-let country = document.querySelectorAll("input")[2].value;
-let bio = document.querySelector("textarea").value;
+let name = document.getElementById("name").value;
+let bio = document.getElementById("bio").value;
+let country = document.getElementById("country").value;
 
 localStorage.setItem("name", name);
-localStorage.setItem("country", country);
 localStorage.setItem("bio", bio);
+localStorage.setItem("country", country);
 
 let photo = document.getElementById("photo").files[0];
 
 if(photo){
-    let reader = new FileReader();
 
-    reader.onload = function(e){
-        localStorage.setItem("photo", e.target.result);
-        alert("Profile Saved!");
-        window.location.href = "profile.html";
-    };
+let reader = new FileReader();
 
-    reader.readAsDataURL(photo);
+reader.onload = function(e){
 
-} else {
-    alert("Profile Saved!");
-    window.location.href = "profile.html";
-            }
-            
-            </script>
+localStorage.setItem("photo", e.target.result);
+
+alert("Profile Saved!");
+
+window.location.href = "profile.html";
+
+};
+
+reader.readAsDataURL(photo);
+
+}else{
+
+alert("Profile Saved!");
+
+window.location.href = "profile.html";
+
+}
+
+}
+</script>
+
 </body>
-</html>
+</html>￼Enter
