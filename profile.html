@@ -80,10 +80,10 @@ const auth = getAuth(app);
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    document.getElementById("username").innerHTML =
-      user.displayName || "UChat User";
-    document.getElementById("email").innerHTML =
-      user.email;
+    let savedName = localStorage.getItem("name");
+
+document.getElementById("username").innerHTML =
+savedName || user.displayName || "UChat User";
   } else {
     window.location.href = "login.html";
   }
