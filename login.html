@@ -40,9 +40,11 @@ window.login = function () {
       alert("Login Successful!");
       window.location.href = "home.html";
     })
-    .catch((error) => {
-      alert(error.code);
-    });
+.catch((error) => {
+  alert(error.code);
+  alert(error.message);
+  console.log(error);
+});
 }
 </script>
 
