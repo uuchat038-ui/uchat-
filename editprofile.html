@@ -77,9 +77,9 @@ Edit Profile
 <script>
 function saveProfile(){
 
-let name = document.querySelectorAll("input")[1].value;
-let country = document.querySelectorAll("input")[2].value;
-let bio = document.querySelector("textarea").value;
+let name = document.getElementById("name").value;
+let country = document.getElementById("country").value;
+let bio = document.getElementById("bio").value;
 
 localStorage.setItem("name", name);
 localStorage.setItem("country", country);
@@ -92,19 +92,22 @@ if(photo){
 
     reader.onload = function(e){
         localStorage.setItem("photo", e.target.result);
-        alert("Profile Saved!");
+
+        alert("Profile Saved Successfully!");
+
         window.location.href = "profile.html";
     };
 
     reader.readAsDataURL(photo);
 
 } else {
-    alert("Profile Saved!");
+
+    alert("Profile Saved Successfully!");
+
     window.location.href = "profile.html";
 }
 
 }
-</script>
-
+    </script>
 </body>
 </html>￼Enter
