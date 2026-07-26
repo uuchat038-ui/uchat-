@@ -118,8 +118,7 @@ document.getElementById("posts").innerHTML = output;
 function likePost(button){
     let count = button.querySelector("span");
     count.innerHTML = Number(count.innerHTML) + 1;
-}
-function commentPost(button){
+   function commentPost(button){
 
 let comment = prompt("Write your comment:");
 
@@ -128,12 +127,12 @@ if(comment == null || comment == "") return;
 let comments = button.parentElement.querySelector(".comments");
 
 comments.innerHTML += "<p>💬 " + comment + "</p>";
-<script type="module">
-
+     }
 </script>
 </script>
 
 <script type="module">
+...
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
