@@ -25,23 +25,25 @@ const firebaseConfig = {
   messagingSenderId: "846402346254",
   appId: "1:846402346254:web:9f45479d5b58764d2ccb5f"
 };
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-window.signUp = function() {
+window.signUp = function () {
   createUserWithEmailAndPassword(
     auth,
     document.getElementById("email").value,
     document.getElementById("password").value
   )
   .then((userCredential) => {
-  alert("Account created successfully!");
-  window.location.href = "login.html";
-})
-.catch((e) => {
-  alert(e.code + "\n" + e.message);
-});
-</script>
+    alert("Account created successfully!");
+    window.location.href = "login.html";
+  })
+  .catch((e) => {
+    alert(e.code + "\n" + e.message);
+  });
+};
 
+  </script>
 </body>
   </html>
