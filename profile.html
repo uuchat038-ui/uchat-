@@ -67,12 +67,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAgOUpPcqczVQdj4cqgosVwTVIK44QGCD0",
-  authDomain: "uchat-c441e.firebaseapp.com",
-  projectId: "uchat-c441e",
-  storageBucket: "uchat-c441e.firebasestorage.app",
-  messagingSenderId: "180429049903",
-  appId: "1:180429049903:web:114d461e2a788f6363f6da"
+  apiKey: "AIzaSyD8uoqOI9J5XbWKbZpgn4VB-DuNf2b1LJc",
+  authDomain: "uchat-b9db2.firebaseapp.com",
+  projectId: "uchat-b9db2",
+  storageBucket: "uchat-b9db2.firebasestorage.app",
+  messagingSenderId: "846402346254",
+  appId: "1:846402346254:web:9f45479d5b58764d2ccb5f"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -81,20 +81,21 @@ const auth = getAuth(app);
 onAuthStateChanged(auth, (user) => {
   if (user) {
     let savedName = localStorage.getItem("name");
-let savedPhoto = localStorage.getItem("photo");
+    let savedPhoto = localStorage.getItem("photo");
 
-if(savedPhoto){
-    document.getElementById("photo").src = savedPhoto;
-  }
     document.getElementById("username").innerHTML =
       savedName || user.displayName || "UChat User";
 
     document.getElementById("email").innerHTML =
       user.email;
+
+    if (savedPhoto) {
+      document.getElementById("photo").src = savedPhoto;
+    }
   } else {
     window.location.href = "login.html";
   }
 });
-  </script>
+</script>
 </body>
 </html>
