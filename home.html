@@ -135,7 +135,13 @@ comments.innerHTML += "<p>💬 " + comment + "</p>";
 ...
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 const firebaseConfig = {
   apiKey: "AIzaSyD8uoqOI9J5XbWKbZpgn4VB-DuNf2b1LJc",
   authDomain: "uchat-b9db2.firebaseapp.com",
@@ -147,14 +153,46 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+onAuthStateChanged(auth, async (user) => {
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    document.getElementById("welcome").innerHTML =
-      "Welcome " + (user.displayName || user.email) + " 👋";
-  } else {
+  if (!user) {
     window.location.href = "login.html";
+    return;
   }
+
+  document.getElementById("welcome").innerHTML =
+    "Welcome " + (user.displayName || user.email) + " 👋";
+
+  const postsDiv = document.getElementById("posts");
+  postsDiv.innerHTML = "";
+
+  const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+  const snapshot = await getDocs(q);
+
+  snapshot.forEach((doc) => {
+
+    const post = doc.data();
+
+    postsDiv.innerHTML += `
+      <div class="post">
+        <h3>${post.user}</h3>
+        <p>${post.text}</p>
+
+        <button onclick="likePost(this)">
+          ❤️ Like <span>0</span>
+        </button>
+
+        <button onclick="commentPost(this)">
+          💬 Comment
+        </button>
+
+        <div class="comments"></div>
+      </div>
+    `;
+
+  });
+
 });
 </script>
 
