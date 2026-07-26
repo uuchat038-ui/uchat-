@@ -34,12 +34,13 @@ window.signUp = function() {
     document.getElementById("email").value,
     document.getElementById("password").value
   )
-  .then(() => {
-  alert("Welcome to UChat!");
-  window.location.href = "home.html";
+  .then((userCredential) => {
+  alert("Account created successfully!");
+  window.location.href = "login.html";
 })
-  .catch(e => alert(e.code + "\n" + e.message));
-}
+.catch((e) => {
+  alert(e.code + "\n" + e.message);
+});
 </script>
 
 </body>
