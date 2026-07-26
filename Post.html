@@ -63,28 +63,53 @@ Create Post
 
 </div>
 
-<script>
-function savePost(){
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-let text=document.getElementById("post").value;
+const firebaseConfig = {
+  apiKey: "AIzaSyD8uoqOI9J5XbWKbZpgn4VB-DuNf2b1LJc",
+  authDomain: "uchat-b9db2.firebaseapp.com",
+  projectId: "uchat-b9db2",
+  storageBucket: "uchat-b9db2.firebasestorage.app",
+  messagingSenderId: "846402346254",
+  appId: "1:846402346254:web:9f45479d5b58764d2ccb5f"
+};
 
-if(text==""){
-alert("Please write something first.");
-return;
-}
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-let posts=JSON.parse(localStorage.getItem("posts"))||[];
+window.savePost = async function(){
 
-posts.unshift(text);
+  let text = document.getElementById("post").value;
 
-localStorage.setItem("posts",JSON.stringify(posts));
+  if(text == ""){
+    alert("Please write something first.");
+    return;
+  }
 
-alert("Post Created!");
+  try{
+    await addDoc(collection(db,"posts"),{
+      text: text,
+      user: auth.currentUser ? auth.currentUser.email : "Unknown",
+      createdAt: serverTimestamp()
+    });
 
-window.location.href="home.html";
+    alert("Post Created!");
+    window.location.href="home.html";
+
+  }catch(error){
+    alert(error.message);
+  }
 
 }
 </script>
-
 </body>
 </html>
